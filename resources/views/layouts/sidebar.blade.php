@@ -36,13 +36,13 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="{{ route('recruitment.index') }}" aria-expanded="false"
                 aria-controls="ui-basic">
-                <span class="menu-title">Recruitment</span>
+                <span class="menu-title">User Management</span>
                 <i class="icon-layers menu-icon"></i>
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Admin</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Staff</a>
                     </li>
                 </ul>
             </div>
