@@ -26,7 +26,7 @@ class RecruitmentController extends Controller
      */
     public function create()
     {
-        $title = 'Recruitment Add Page';
+        $title = 'Recruitment Form';
 
         return view('recruitment.create', compact('title'));
     }
@@ -47,6 +47,7 @@ class RecruitmentController extends Controller
             'no_telp' => 'required',
             'alamat' => 'required',
         ]);
+        dd($request->all());
         DB::beginTransaction();
         try {
             $recruitment                        = new Recruitment();
@@ -89,9 +90,12 @@ class RecruitmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Recruitment $recruitment)
     {
-        //
+        $title = 'Recruitment Form Edit';
+        $data = Recruitment::where('id', $recruitment->id)->first();
+
+        return view('recruitment.edit', compact('title', 'data'));
     }
 
     /**
