@@ -15,7 +15,7 @@ class RecruitmentController extends Controller
         $title  = 'Recruitment Page';
         $data   = Recruitment::all();
 
-        return view('recruitment', compact('title', 'data'));
+        return view('recruitment.index', compact('title', 'data'));
     }
 
     /**
@@ -23,7 +23,9 @@ class RecruitmentController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Recruitment Add Page';
+
+        return view('recruitment.create', compact('title'));
     }
 
     /**
