@@ -28,14 +28,13 @@
         </li>
         <li class="nav-item nav-category"><span class="nav-link">Master</span></li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('recruitment.index') }}">
+            <a class="nav-link" href="{{ route('recruitments.index') }}">
                 <span class="menu-title">Recruitment</span>
                 <i class="icon-globe menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="{{ route('recruitment.index') }}" aria-expanded="false"
-                aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" href="#" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-title">User Management</span>
                 <i class="icon-layers menu-icon"></i>
             </a>
