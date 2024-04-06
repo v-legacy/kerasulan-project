@@ -82,8 +82,11 @@ class RecruitmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Recruitment $recruitment)
     {
+        // $recruitment = Recruitment::where('id', $recruitment->id)->first();
+
+        return view('recruitment.show');
     }
 
     /**

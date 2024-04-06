@@ -27,6 +27,7 @@ Route::controller(RecruitmentController::class)->prefix('recruitments')->group(f
     Route::get('index', 'index')->name('recruitments.index');
     Route::get('create', 'create')->name('recruitments.create');
     Route::post('store', 'store')->name('recruitments.store');
+    Route::get('show/{recruitment}', 'show')->name('recruitments.show');
     Route::get('edit/{recruitment}', 'edit')->name('recruitments.edit');
     Route::put('update/{recruitment}', 'update')->name('recruitments.update');
     Route::delete('destroy/{recruitment}', 'destroy')->name('recruitments.destroy');
