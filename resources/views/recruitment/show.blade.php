@@ -1,33 +1,29 @@
 @extends('layouts.master')
 @section('content')
     <div class="row justify-content-center">
-        <div class="card">
+        <div class="card col-md-6">
             <div class="card-body">
                 <div class="py-4">
-                    <p class="clearfix">
-                        <span class="float-start"> Status </span>
-                        <span class="float-end text-muted"> Active </span>
-                    </p>
-                    <p class="clearfix">
-                        <span class="float-start"> Phone </span>
-                        <span class="float-end text-muted"> 006 3435 22 </span>
-                    </p>
-                    <p class="clearfix">
-                        <span class="float-start"> Mail </span>
-                        <span class="float-end text-muted"> Jacod@testmail.com </span>
-                    </p>
-                    <p class="clearfix">
-                        <span class="float-start"> Facebook </span>
-                        <span class="float-end text-muted">
-                            <a href="#">David Grey</a>
-                        </span>
-                    </p>
-                    <p class="clearfix">
-                        <span class="float-start"> Twitter </span>
-                        <span class="float-end text-muted">
-                            <a href="#">@davidgrey</a>
-                        </span>
-                    </p>
+                    <div class="d-flex align-items-center justify-content-around mb-2">
+                        <span class="text-md"> Nama Lengkap </span>
+                        <span class="text-md"> {{ $recruitment->nama_lengkap }} </span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-around mb-2">
+                        <span class="text-md"> NIK </span>
+                        <span class="text-md"> {{ $recruitment->nik }} </span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-around mb-2">
+                        <span class="text-md"> Status </span>
+                        <span class="text-md"> Active </span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-around mb-2">
+                        <span class="text-md"> Status </span>
+                        <span class="text-md"> Active </span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-around mb-2">
+                        <span class="text-md"> Status </span>
+                        <span class="text-md"> Active </span>
+                    </div>
                 </div>
             </div>
         </div>

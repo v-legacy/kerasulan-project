@@ -84,9 +84,9 @@ class RecruitmentController extends Controller
      */
     public function show(Recruitment $recruitment)
     {
-        // $recruitment = Recruitment::where('id', $recruitment->id)->first();
+        $recruitment = Recruitment::where('id', $recruitment->id)->first();
 
-        return view('recruitment.show');
+        return view('recruitment.show', compact('recruitment'));
     }
 
     /**
