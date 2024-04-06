@@ -26,7 +26,7 @@ class RecruitmentController extends Controller
      */
     public function create()
     {
-        $title = 'Recruitment Add Page';
+        $title = 'Recruitment Form';
 
         return view('recruitment.create', compact('title'));
     }
@@ -47,6 +47,7 @@ class RecruitmentController extends Controller
             'no_telp' => 'required',
             'alamat' => 'required',
         ]);
+        dd($request->all());
         DB::beginTransaction();
         try {
             $recruitment                        = new Recruitment();
@@ -89,17 +90,59 @@ class RecruitmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Recruitment $recruitment)
     {
-        //
+        $title = 'Recruitment Form Edit';
+        $data = Recruitment::where('id', $recruitment->id)->first();
+
+        return view('recruitment.edit', compact('title', 'data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Recruitment $recruitment)
     {
-        //
+        $this->validate($request, [
+            'nik' => 'required',
+            'nama_lengkap' => 'required',
+            'email' => 'required',
+            'pekerjaan' => 'required',
+            'umur' => 'required',
+            'pendidikan_terakhir' => 'required',
+            'no_telp' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $recruitment                = Recruitment::where('id', $recruitment->id)->first();
+            $recruitment->nik                   = $request->nik;
+            $recruitment->nama_lengkap          = $request->nama_lurator;
+            $recruitment->email                 = $request->email;
+            $recruitment->pekerjaan             = $request->pekerjaan;
+            $recruitment->umur                  = $request->umur;
+            $recruitment->pendidikan_terakhir   = $request->pendidikan_terakhir;
+            $recruitment->no_telp               = $request->no_telp;
+            $recruitment->alamat                = $request->alamat;
+
+
+            $user = new User();
+            $user->name                         = $request->name;
+            $user->email                        = $request->email;
+            $user->password                     = bcrypt($request->email);
+
+            $user->save();
+
+            $recruitment->id_user               = $user->id;
+
+            $recruitment->save();
+            DB::commit();
+            return redirect()->route('recruitment.index')->with('success', 'Data Berhasil diupdate');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
