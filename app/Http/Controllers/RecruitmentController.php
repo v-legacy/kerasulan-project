@@ -101,9 +101,48 @@ class RecruitmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Recruitment $recruitment)
     {
-        //
+        $this->validate($request, [
+            'nik' => 'required',
+            'nama_lengkap' => 'required',
+            'email' => 'required',
+            'pekerjaan' => 'required',
+            'umur' => 'required',
+            'pendidikan_terakhir' => 'required',
+            'no_telp' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $recruitment                = Recruitment::where('id', $recruitment->id)->first();
+            $recruitment->nik                   = $request->nik;
+            $recruitment->nama_lengkap          = $request->nama_lurator;
+            $recruitment->email                 = $request->email;
+            $recruitment->pekerjaan             = $request->pekerjaan;
+            $recruitment->umur                  = $request->umur;
+            $recruitment->pendidikan_terakhir   = $request->pendidikan_terakhir;
+            $recruitment->no_telp               = $request->no_telp;
+            $recruitment->alamat                = $request->alamat;
+
+
+            $user = new User();
+            $user->name                         = $request->name;
+            $user->email                        = $request->email;
+            $user->password                     = bcrypt($request->email);
+
+            $user->save();
+
+            $recruitment->id_user               = $user->id;
+
+            $recruitment->save();
+            DB::commit();
+            return redirect()->route('recruitment.index')->with('success', 'Data Berhasil diupdate');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
