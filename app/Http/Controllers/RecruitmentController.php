@@ -82,9 +82,11 @@ class RecruitmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Recruitment $recruitment)
     {
-        //
+        $recruitment = Recruitment::where('id', $recruitment->id)->first();
+
+        return view('recruitment.show', compact('recruitment'));
     }
 
     /**
@@ -126,7 +128,6 @@ class RecruitmentController extends Controller
             $recruitment->no_telp               = $request->no_telp;
             $recruitment->alamat                = $request->alamat;
 
-
             $user = new User();
             $user->name                         = $request->name;
             $user->email                        = $request->email;
@@ -148,8 +149,17 @@ class RecruitmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Recruitment $recruitment)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $recruitment = Recruitment::where('id', $recruitment->id)->first();
+            $recruitment->delete();
+            DB::commit();
+            return redirect()->route('recruitment.index')->with('success', 'Data Berhasil dihapus');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 }
