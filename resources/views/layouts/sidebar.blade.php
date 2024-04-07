@@ -26,6 +26,15 @@
                 <i class="icon-screen-desktop menu-icon"></i>
             </a>
         </li>
+        <li class="nav-item nav-category">
+            <span class="nav-link">Simulation</span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard.index') }}">
+                <span class="menu-title">Data Training</span>
+                <i class="icon-screen-desktop menu-icon"></i>
+            </a>
+        </li>
         <li class="nav-item nav-category"><span class="nav-link">Master</span></li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('recruitments.index') }}">
