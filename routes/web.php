@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTrainingController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,4 +45,14 @@ Route::controller(DataTrainingController::class)->prefix('data-training')->group
     Route::get('edit/{dataTraining}', 'edit')->name('data-training.edit');
     Route::put('update/{dataTraining}', 'update')->name('data-training.update');
     Route::delete('destroy/{dataTraining}', 'destroy')->name('data-training.destroy');
+});
+
+
+Route::controller(UserController::class)->prefix('users')->group(function () {
+    Route::get('index', 'index')->name('users.index');
+    Route::get('create', 'create')->name('users.create');
+    Route::post('store', 'store')->name('users.store');
+    Route::get('edit/{user}', 'edit')->name('users.edit');
+    Route::put('update/{user}', 'update')->name('users.update');
+    Route::delete('destroy/{user}', 'destroy')->name('users.destroy');
 });
