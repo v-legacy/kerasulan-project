@@ -36,6 +36,8 @@ Route::controller(RecruitmentController::class)->prefix('recruitments')->group(f
 
 Route::controller(DataTrainingController::class)->prefix('data-training')->group(function () {
     Route::get('index', 'index')->name('data-training.index');
+    Route::post('import', 'import')->name('data-training.import');
+    Route::get('process', 'process')->name('data-training.process');
     Route::get('create', 'create')->name('data-training.create');
     Route::post('store', 'store')->name('data-training.store');
     Route::get('show/{dataTraining}', 'show')->name('data-training.show');
