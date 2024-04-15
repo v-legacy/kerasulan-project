@@ -91,13 +91,16 @@ class DataTrainingController extends Controller
                     $new_w2[$start][$key] = [
                         'w2_baru' => $w2_baru,
                     ];
+
                     if ($delta_w1 !== null) {
                         if (count($new_w1[$start]) > 1) {
                             $delta_w1 =  $w1_baru - $new_w1[$start][$key - 1]['w1_baru'];
+                            $delta_w2 =  $new_w2[$start][$key]['w2_baru'] - $delta_w2_current[$start][$key - 1]['delta_w2'];
                         } elseif (count($new_w1) > 1 && $new_w1[$start][0]) {
                             $count = count($new_w1[$start - 1]);
                             // dd('sini a', $new_w1[$start - 1][$count - 1],);
                             $delta_w1 =  $w1_baru - $new_w1[$start - 1][$count - 1]['w1_baru'];
+                            $delta_w2 =  $w2_baru - $delta_w2_current[$start - 1][$count - 1]['delta_w2'];
                         }
                     } elseif ($delta_w1 === null) {
                         $delta_w1 = $w1_baru - $w1_awal;
@@ -134,14 +137,17 @@ class DataTrainingController extends Controller
                     $new_w2[$start][$key] = [
                         'w2_baru' => $w2_baru,
                     ];
+
                     if ($delta_w1 !== null) {
 
                         if (count($new_w1[$start]) > 1) {
                             $delta_w1 =  $w1_baru - $new_w1[$start][$key - 1]['w1_baru'];
+                            $delta_w2 =  $new_w2[$start][$key]['w2_baru'] - $delta_w2_current[$start][$key - 1]['delta_w2'];
                         } elseif (count($temp) > 1 && $new_w1[$start][0]) {
                             // dd('sini b');
                             $count = count($new_w1[$start - 1]);
                             $delta_w1 =  $w1_baru - $new_w1[$start - 1][$count - 1]['w1_baru'];
+                            $delta_w2 =  $w2_baru - $delta_w2_current[$start - 1][$count - 1]['delta_w2'];
                         }
                     } elseif ($delta_w1 === null) {
                         $delta_w1 = $w1_baru - $w1_awal;
@@ -164,14 +170,7 @@ class DataTrainingController extends Controller
                     ];
                 }
             }
-            // if (count($new_w1) > 1) {
-            //     $x = array_key_last($new_w1[$start]);
-            //     dd(
-            //         'oke',
-            //         $temp
-            //     );
-            // }
-            // dd($new_w1);
+
             $result =  array_filter($temp[$start], function ($value) {
                 return $value['y'] !== $value['y_target'];
             });
@@ -180,15 +179,8 @@ class DataTrainingController extends Controller
             }
             $start++;
         }
-        dd($temp, $new_w1, count($temp));
-        // dd(
-        //     $new_w1,
-        //     $temp,
-        //     $new_w1[1][0]['w1_baru'] - $new_w1[0][4]['w1_baru'],
+        dd($temp);
 
-
-
-        // );
         return $temp;
 
 
