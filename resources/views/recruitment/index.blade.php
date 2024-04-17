@@ -9,6 +9,9 @@
                     </p>
                     <a href="{{ route('recruitments.create') }}" class="btn btn-dark btn-sm mb-2"><i class="icon-plus"></i> Add
                         Data</a>
+                    <a href="{{ route('recruitments.process') }}" class="btn btn-info btn-sm mb-2"><i class="icon-check"></i>
+                        Process
+                    </a>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
