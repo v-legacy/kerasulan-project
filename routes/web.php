@@ -27,6 +27,8 @@ Route::controller(DashboardController::class)->prefix('dashboard')->group(functi
 
 Route::controller(RecruitmentController::class)->prefix('recruitments')->group(function () {
     Route::get('index', 'index')->name('recruitments.index');
+    Route::post('import', 'import')->name('recruitments.import');
+    Route::get('process', 'process')->name('recruitments.process');
     Route::get('create', 'create')->name('recruitments.create');
     Route::post('store', 'store')->name('recruitments.store');
     Route::get('show/{recruitment}', 'show')->name('recruitments.show');

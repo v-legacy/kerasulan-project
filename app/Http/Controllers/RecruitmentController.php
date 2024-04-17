@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+use Maatwebsite\Excel\Facades\Excel;
+
 class RecruitmentController extends Controller
 {
     /**
@@ -19,6 +21,32 @@ class RecruitmentController extends Controller
         $data   = Recruitment::all();
 
         return view('recruitment.index', compact('title', 'data'));
+    }
+
+    private function import(Request $request)
+    {
+        $file = $request->file('file');
+
+        try {
+            if (isset($file)) {
+                DB::table('recruitment')->truncate();
+                Excel::import(new \App\Imports\RecruitmentImport, $file);
+                return back()->with('success', 'Data Berhasil dimport');
+            }
+        } catch (\Exception $e) {
+            return back()->with('failed', $e->getMessage());
+        }
+    }
+
+    public function prosess()
+    {
+        try {
+            $data =  DB::table('recruitment')->get();
+            dd($data);
+            return view('recruitment.prosess');
+        } catch (\Exception $e) {
+            return back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
