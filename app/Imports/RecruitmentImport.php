@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class RecruitmentImport implements ToModel, WithHeadingRow
 {
     /**
-     * @param Collection $collection
+     * @param Model $model
      */
     public function model(array $row)
     {
@@ -19,6 +19,7 @@ class RecruitmentImport implements ToModel, WithHeadingRow
             'nama' => $row['nama'],
             'pecah_suara' => $row['pecah_suara'],
             'audio_video' => $row['audio_video'],
+            'bidang' => $row['bidang'],
         ]);
     }
 }

@@ -13,16 +13,11 @@ return new class extends Migration
     {
         Schema::create('recruitment', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_user')->unsigned();
-            $table->string('nik', 60);
-            $table->string('nama_lengkap', 60);
-            $table->string('pekerjaan', 60);
-            $table->string('alamat', 60);
-            $table->string('telp', 60);
-            $table->string('umur', 60);
-            $table->string('pendidikan', 60);
-            $table->string('email', 60);
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->string('nama');
+            $table->integer('pecah_suara');
+            $table->integer('audio_video');
+            $table->string('bidang', 32);
+            $table->timestamps();
         });
     }
 

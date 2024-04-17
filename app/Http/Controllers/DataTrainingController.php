@@ -21,7 +21,7 @@ class DataTrainingController extends Controller
         return view('data-training.index', compact('title', 'data'));
     }
 
-    private function import(Request $request)
+    public function import(Request $request)
     {
         $file = $request->file('file');
 

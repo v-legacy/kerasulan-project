@@ -23,13 +23,14 @@ class RecruitmentController extends Controller
         return view('recruitment.index', compact('title', 'data'));
     }
 
-    private function import(Request $request)
+    public function import(Request $request)
     {
         $file = $request->file('file');
-
+        // dd($file);
         try {
             if (isset($file)) {
                 DB::table('recruitment')->truncate();
+
                 Excel::import(new \App\Imports\RecruitmentImport, $file);
                 return back()->with('success', 'Data Berhasil dimport');
             }
@@ -38,12 +39,14 @@ class RecruitmentController extends Controller
         }
     }
 
-    public function prosess()
+    public function process()
+
     {
+        $title = 'Recruitment Process';
         try {
             $data =  DB::table('recruitment')->get();
-            dd($data);
-            return view('recruitment.prosess');
+            $results = getResult($data);
+            return view('recruitment.process', compact('title', 'results'));
         } catch (\Exception $e) {
             return back()->with('failed', $e->getMessage());
         }
