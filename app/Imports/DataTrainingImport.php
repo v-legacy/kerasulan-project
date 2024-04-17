@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class DataTrainingImport implements ToModel, WithHeadingRow
 {
     /**
-     * @param Collection $collection
+     * @param Model $model
      */
     public function model(array $row)
     {

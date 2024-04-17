@@ -10,4 +10,5 @@ class Recruitment extends Model
     use HasFactory;
 
     protected $table = 'recruitment';
+    protected $guarded = [];
 }

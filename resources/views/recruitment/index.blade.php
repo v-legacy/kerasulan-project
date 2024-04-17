@@ -5,39 +5,57 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">{{ $title }}</h4>
-                    <p class="card-description"> Add class <code>.table-bordered</code>
-                    </p>
-                    <a href="{{ route('recruitments.create') }}" class="btn btn-dark btn-sm mb-2"><i class="icon-plus"></i> Add
-                        Data</a>
-                    <a href="{{ route('recruitments.process') }}" class="btn btn-info btn-sm mb-2"><i class="icon-check"></i>
-                        Process
-                    </a>
+                    @if (session()->has('failed'))
+                        <div class="alert alert-danger text-danger font-weight-bold" role="alert">
+                            {{ session('failed') }}
+                        </div>
+                    @endif
+
+                    @if (session('success'))
+                        <div class="alert alert-success text-success font-weight-bold" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    <form action="{{ route('recruitments.import') }}" method="POST" autocomplete="off"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="row justify-content-between">
+                            <div class="col-md-9">
+                                <a href="{{ route('recruitments.create') }}" class="btn btn-dark btn-sm mb-2"><i
+                                        class="icon-plus"></i> Add
+                                    Data</a>
+                                <a href="{{ route('recruitments.process') }}" class="btn btn-info btn-sm mb-2"><i
+                                        class="icon-check"></i>
+                                    Process
+                                </a>
+                            </div>
+                            <div class="input-group col-md-3">
+                                <input type="file" class="form-control form-control-sm" placeholder="Upload File"
+                                    name="file">
+                                <span class="input-group-append">
+                                    <button class="file-upload-browse btn btn-dark btn-sm" type="submit">Upload</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th> # </th>
-                                <th> First name </th>
-                                <th> Progress </th>
-                                <th> Amount </th>
-                                <th> Deadline </th>
+                                <th> Nama </th>
+                                <th> Pecah Suara </th>
+                                <th> Audio Video </th>
+                                <th> Bidang </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($data as $dt)
                                 <tr>
-                                    <td> {{ $dt->id }} </td>
-                                    <td> {{ $dt->nama_lengkap }} </td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td> $ 77.99 </td>
-                                    <td>
-                                        <a href="{{ route('recruitments.show', $dt->id) }}"
-                                            class="btn btn-dark btn-sm">Show</a>
-                                    </td>
+                                    <td> {{ $loop->iteration }} </td>
+                                    <td> {{ $dt->nama }} </td>
+                                    <td> {{ $dt->pecah_suara }} </td>
+                                    <td> {{ $dt->audio_video }} </td>
+                                    <td> {{ $dt->bidang }} </td>
                                 </tr>
                             @endforeach
                         </tbody>
