@@ -4,7 +4,12 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">{{ $title }}</h4>
+                    <h4 class="d-inline card-title">{{ $title }}</h4>
+                    @if (DB::table('predicted')->count() == 0)
+                        <p class="d-inline alert-warning"><i class="icon-info"></i> Data Training Belum
+                            dilakukan
+                        </p>
+                    @endif
                     @if (session()->has('failed'))
                         <div class="alert alert-danger text-danger font-weight-bold" role="alert">
                             {{ session('failed') }}
@@ -19,15 +24,23 @@
                     <form action="{{ route('recruitments.import') }}" method="POST" autocomplete="off"
                         enctype="multipart/form-data">
                         @csrf
-                        <div class="row justify-content-between">
-                            <div class="col-md-9">
+                        <div class="row justify-content-between mt-2">
+                            <div class="col-md-8">
                                 <a href="{{ route('recruitments.create') }}" class="btn btn-dark btn-sm mb-2"><i
                                         class="icon-plus"></i> Add
                                     Data</a>
-                                <a href="{{ route('recruitments.process') }}" class="btn btn-info btn-sm mb-2"><i
-                                        class="icon-check"></i>
-                                    Process
-                                </a>
+                                @if (\DB::table('predicted')->count() > 0)
+                                    <a href="{{ route('recruitments.process') }}" class="btn btn-info btn-sm mb-2"><i
+                                            class="icon-check"></i>
+                                        Process
+                                    </a>
+                                @else
+                                    <a href="#" class="btn btn-secondary btn-sm mb-2"><i class="icon-check"></i>
+                                        Process
+                                    </a>
+                                    Data Training Belum dilakukan
+                                @endif
+
                             </div>
                             <div class="input-group col-md-3">
                                 <input type="file" class="form-control form-control-sm" placeholder="Upload File"

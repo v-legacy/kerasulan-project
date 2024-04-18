@@ -43,10 +43,40 @@ class RecruitmentController extends Controller
 
     {
         $title = 'Recruitment Process';
+        $truePositives = 0;
+        $falsePositives = 0;
+        $trueNegatives = 0;
+        $falseNegatives = 0;
+        $matrix = [];
         try {
             $data =  DB::table('recruitment')->get();
             $results = getResult($data);
-            return view('recruitment.process', compact('title', 'results'));
+
+
+            foreach ($results as $key => $value) {
+                if ($value['y_luaran'] == 1 && $value['y_target'] == 1) {
+                    $truePositives++;
+                } elseif ($value['y_luaran'] == 1 && $value['y_target'] == 0) {
+                    $falsePositives++;
+                } elseif ($value['y_luaran'] == 0 && $value['y_target'] == 1) {
+                    $falseNegatives++;
+                } elseif ($value['y_luaran'] == 0 && $value['y_target'] == 0) {
+                    $trueNegatives++;
+                }
+            }
+            $matrix = [
+                'truePositives' => $truePositives,
+                'trueNegatives' => $trueNegatives,
+                'falsePositives' => $falsePositives,
+                'falseNegatives' => $falseNegatives
+            ];
+
+            $akurate    = ($truePositives + $trueNegatives) / ($truePositives + $trueNegatives + $falsePositives + $falseNegatives) * 100;
+            $precision  = $truePositives / ($truePositives + $falsePositives) * 100;
+            $recall     = $truePositives / ($truePositives + $falseNegatives) * 100;
+
+
+            return view('recruitment.process', compact('title', 'results', 'matrix', 'akurate', 'precision', 'recall'));
         } catch (\Exception $e) {
             return back()->with('failed', $e->getMessage());
         }
