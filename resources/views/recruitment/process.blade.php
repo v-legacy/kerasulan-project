@@ -24,7 +24,7 @@
                         @csrf
                         <div class="row justify-content-between">
                             <div class="col-md-2">
-                                <a href="#predicted" class="btn btn-dark btn-sm float-left">Prediksi Nilai Baru</a>
+                                {{-- <a href="#predicted" class="btn btn-dark btn-sm float-left">Prediksi Nilai Baru</a> --}}
                             </div>
                         </div>
                     </form>
@@ -124,7 +124,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Results</h4>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-between">
                         <div class="col-md-4">
                             <div class="aligner-wrapper">
                                 <div class="chartjs-size-monitor">
@@ -144,6 +144,71 @@
                                 </div>
                             </div>
                         </div>
+                        <style>
+                            .bg-code {
+                                background-color: #fafafa;
+                            }
+                        </style>
+                        <div class="col-md-8 p-4 bg-code">
+                            <div class="row justify-content-center text-center">
+                                <div class="col-md-4">
+                                    <div class="font-weight-bold">
+                                        <h3>Accuracy</h3>
+                                        <h6 class="my-4">Accuracy = TP + TN / (TP+TN+FP+FN)</h6>
+                                        <hr class="mb-4">
+                                        <h5 class="my-4">Accuracy =
+                                            {{ $matrix['truePositives'] . ' + ' . $matrix['trueNegatives'] }} /
+                                            (
+                                            {{ $matrix['truePositives'] . ' + ' . $matrix['trueNegatives'] . ' + ' . $matrix['falsePositives'] . ' + ' . $matrix['falseNegatives'] }}
+                                            )
+                                        </h5>
+                                        <h5 class="my-5">
+                                            Accuracy = {{ $matrix['truePositives'] + $matrix['trueNegatives'] }} /
+                                            {{ $matrix['truePositives'] + $matrix['trueNegatives'] + $matrix['falsePositives'] + $matrix['falseNegatives'] }}
+                                            = {{ $akurate }}%
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="font-weight-bold">
+                                        <h3>Precision</h3>
+                                        <h5 class="my-4">Precision = TP / (TP + FP)</h5>
+                                        <hr class="mb-4">
+                                        <h5 class="my-4">Precision =
+                                            {{ $matrix['truePositives'] }} /
+                                            (
+                                            {{ $matrix['truePositives'] . ' + ' . $matrix['falsePositives'] }}
+                                            )
+                                        </h5>
+                                        <h5 class="my-5">
+                                            Precision = {{ $matrix['truePositives'] }} /
+                                            {{ $matrix['truePositives'] + $matrix['falsePositives'] }}
+                                            = {{ $precision }}%
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="font-weight-bold">
+                                        <h3>Recall</h3>
+                                        <h5 class="my-4">Recall = TP / (TP + FN)</h5>
+                                        <hr class="mb-4">
+                                        <h5 class="my-4">Recall =
+                                            {{ $matrix['truePositives'] }} /
+                                            (
+                                            {{ $matrix['truePositives'] . ' + ' . $matrix['falseNegatives'] }}
+                                            )
+                                        </h5>
+                                        <h5 class="my-5">
+                                            Recall = {{ $matrix['truePositives'] }} /
+                                            {{ $matrix['truePositives'] + $matrix['falseNegatives'] }}
+                                            = {{ $recall }}%
+                                        </h5>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
 
                     </div>
                 </div>
@@ -156,7 +221,7 @@
         const ctx = document.getElementById('myChart');
         const data = {
             labels: [
-                {!! json_encode($akurate) !!} + '%' + ' Akurasi', {!! json_encode($precision) !!} + '%' + ' Precision',
+                {!! json_encode($akurate) !!} + '%' + ' Accuracy', {!! json_encode($precision) !!} + '%' + ' Precision',
                 {!! json_encode($recall) !!} + '%' + ' Recall'
             ],
             datasets: [{
