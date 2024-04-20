@@ -19,6 +19,8 @@ class DataTrainingImport implements ToModel, WithHeadingRow
             'pecah_suara' => $row['pecah_suara'],
             'audio_video' => $row['audio_video'],
             'bidang' => $row['bidang'],
+            'y_target' => $row['bidang'] == 'Choir' ? 1 : 0,
+
 
         ]);
     }

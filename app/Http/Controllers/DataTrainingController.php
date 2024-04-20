@@ -43,10 +43,12 @@ class DataTrainingController extends Controller
         try {
             $title = 'Data Training';
             $data = DB::table('data_training')
-                ->select('nama', 'pecah_suara', 'audio_video',  'y_target')
+                ->select('nama', 'pecah_suara', 'audio_video', 'y_target')
                 ->get()
                 ->toArray();
             $result = $this->recursive($data);
+
+
             return view('data-training.process', compact('title', 'result'));
         } catch (\Throwable $th) {
             return back()->with('failed', $th->getMessage());
@@ -233,6 +235,7 @@ class DataTrainingController extends Controller
             }
             $start++;
         }
+        // dd($temp);
         return $temp;
     }
 

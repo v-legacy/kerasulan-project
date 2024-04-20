@@ -11,5 +11,5 @@ class DataTraining extends Model
 
     protected $table = 'data_training';
 
-    protected $fillable = ['nama', 'pecah_suara', 'audio_video', 'bidang'];
+    protected $fillable = ['nama', 'pecah_suara', 'audio_video', 'bidang', 'y_target'];
 }

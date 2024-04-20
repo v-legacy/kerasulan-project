@@ -171,7 +171,7 @@
                                         background: linear-gradient(90deg, rgb(203, 147, 246) 0%, rgb(93, 54, 235) 35%, rgb(15, 193, 229) 100%) !important;
                                     }
                                 </style>
-                                {{-- b3428siu --}}
+
                                 @if (isset($predicted))
                                     @if ($predicted['y_luaran'] == 1)
                                         <button type="button" class="btn bg-gradient-one bidang mt-5 ">
@@ -265,11 +265,8 @@
                                                 {{ $predicted['delta_w2'] }}
                                             </td>
                                         </tr>
-
-
                                     </table>
                                 @endif
-
                             </div>
                         </div>
                     </div>
