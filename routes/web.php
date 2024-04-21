@@ -50,7 +50,6 @@ Route::controller(DataTrainingController::class)->prefix('data-training')->group
     Route::delete('destroy/{dataTraining}', 'destroy')->name('data-training.destroy');
 });
 
-
 Route::controller(UserController::class)->prefix('users')->group(function () {
     Route::get('index', 'index')->name('users.index');
     Route::get('create', 'create')->name('users.create');

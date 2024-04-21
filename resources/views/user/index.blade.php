@@ -12,10 +12,10 @@
                         <thead>
                             <tr>
                                 <th> # </th>
-                                <th> First name </th>
-                                <th> Progress </th>
-                                <th> Amount </th>
-                                <th> Deadline </th>
+                                <th> Username </th>
+                                <th> Name </th>
+                                <th> Role </th>
+                                <th> Option </th>
                             </tr>
                         </thead>
                         <tbody>

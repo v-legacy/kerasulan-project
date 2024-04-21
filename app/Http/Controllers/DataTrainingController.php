@@ -235,7 +235,7 @@ class DataTrainingController extends Controller
             }
             $start++;
         }
-        // dd($temp);
+
         return $temp;
     }
 
@@ -246,7 +246,6 @@ class DataTrainingController extends Controller
             $nama = $request->nama;
             $x1 = $request->pecah_suara;
             $x2 = $request->audio_video;
-
             $rate = 1;
             $treshold = 0;
             $predicted = [];
@@ -282,12 +281,10 @@ class DataTrainingController extends Controller
                 $error = $latest_row->y_target - 1;
                 $y_luaran = 1;
                 $y_target = $x1 > $x2 ? 1 : 0;
-
                 $w1_baru = $latest_row->w1_baru + $rate * $latest_row->error * $x1;
                 $w2_baru = $latest_row->w2_baru + $rate * $latest_row->error * $x2;
                 $delta_w1 = $w1_baru - $latest_row->w1_baru;
                 $delta_w2 = $w2_baru - $latest_row->delta_w2;
-
                 $predicted = [
                     'nama' => $nama,
                     'x1' => $x1,
@@ -306,9 +303,8 @@ class DataTrainingController extends Controller
                 ->select('nama', 'pecah_suara', 'audio_video',  'y_target')
                 ->get()
                 ->toArray();
+
             $result = $this->recursive($data);
-
-
 
             return view('data-training.process', compact('title', 'result', 'predicted'));
         } catch (\Throwable $th) {
