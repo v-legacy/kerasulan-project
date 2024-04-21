@@ -42,4 +42,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getAvatar()
+    {
+        $avatar = 'https://www.gravatar.com/avatar/' . md5($this->username) . '?d=mp';
+        return $avatar;
+    }
 }

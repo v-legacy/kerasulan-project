@@ -22,7 +22,7 @@
                             @foreach ($data as $dt)
                                 <tr>
                                     <td> {{ $dt->id }} </td>
-                                    <td> {{ $dt->nama_lengkap }} </td>
+                                    <td> {{ $dt->name }} </td>
                                     <td>
                                         <div class="progress">
                                             <div class="progress-bar bg-success" role="progressbar" style="width: 25%"

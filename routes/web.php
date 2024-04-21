@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTrainingController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -58,3 +59,5 @@ Route::controller(UserController::class)->prefix('users')->group(function () {
     Route::put('update/{user}', 'update')->name('users.update');
     Route::delete('destroy/{user}', 'destroy')->name('users.destroy');
 });
+
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
