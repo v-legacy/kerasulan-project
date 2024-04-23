@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function getAvatar()
     {
-        $avatar = 'https://www.gravatar.com/avatar/' . md5($this->username) . '?d=mp';
+        $avatar = 'https://www.gravatar.com/avatar/' . md5($this->username) . '?d=wavatar';
         return $avatar;
     }
 }
